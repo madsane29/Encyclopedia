@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Tue Jul 31 04:12:25 CEST 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0164-ee1b-a038-00000a44a660 
+Tue Jul 31 17:53:48 CEST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0164-f10b-9fe7-00000a44e8d8 
 on database directory C:\Users\Petkovics\Desktop\newproject\Encyclopedia\animalsDB with class loader sun.misc.Launcher$AppClassLoader@55f96302 
-Loaded from file:/C:/Users/Petkovics/Desktop/newproject/Encyclopedia/dist/run945561183/lib/derby.jar
+Loaded from file:/C:/Users/Petkovics/Desktop/newproject/Encyclopedia/dist/run401498708/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_171-b11
 user.dir=C:\Users\Petkovics\Desktop\newproject\Encyclopedia

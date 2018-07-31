@@ -112,6 +112,7 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    
     @FXML
     private void lastEditButton(ActionEvent event) {
         String name = inputEditName.getText();
@@ -121,9 +122,14 @@ public class FXMLDocumentController implements Initializable {
         Animal tmp = new Animal(name, lifespan, color, sound, tempID);
         
         
-        db.updateAnimal(tmp);
+        /*db.updateAnimal(tmp);
         data.clear();
         data.addAll(db.getAllAnimals());
+        table.setItems(data);*/
+        
+        db.updateAnimal(tmp);
+        data.removeIf((Animal dataAnimal) -> dataAnimal.getID().equals(tmp.getID()));
+        data.add(tmp);
         table.setItems(data);
         
         thirdPane.setVisible(false);
@@ -255,7 +261,7 @@ public class FXMLDocumentController implements Initializable {
         soundCol.setCellValueFactory(new PropertyValueFactory<>("sound"));
 
         TableColumn IDCol = new TableColumn("ID");
-        IDCol.setMinWidth(100);
+        IDCol.setMinWidth(50);
         IDCol.setMaxWidth(200);
         //IDCol.setCellFactory(TextFieldTableCell.forTableColumn());
         IDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
