@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="encyclopedia.FXMLDocumentController">
+   <children>
+      <Pane id="firstPane" fx:id="firstPane" prefHeight="720.0" prefWidth="615.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bddd78" height="720.0" stroke="BLACK" strokeType="INSIDE" width="615.0" />
+            <HBox layoutX="15.0" layoutY="622.0" prefHeight="36.0" prefWidth="588.0" spacing="200.0">
+               <children>
+                  <Button id="addButton" fx:id="addButton" layoutX="113.0" layoutY="655.0" mnemonicParsing="false" onAction="#addButton" prefHeight="36.0" prefWidth="64.0" text="Add" />
+                  <Button id="editButton" fx:id="editButton" layoutX="276.0" layoutY="655.0" mnemonicParsing="false" onAction="#editButton" prefHeight="36.0" prefWidth="64.0" text="Edit" />
+                  <Button id="deleteButton" fx:id="deleteButton" layoutX="436.0" layoutY="655.0" mnemonicParsing="false" onAction="#deleteButton" prefHeight="36.0" prefWidth="64.0" text="Delete" />
+               </children>
+            </HBox>
+            <Label layoutX="43.0" layoutY="54.0" text="Name:">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Button id="searchButton" fx:id="searchButton" defaultButton="true" layoutX="507.0" layoutY="54.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="36.0" prefWidth="81.0" text="Search" />
+            <TextField id="inputSearch" fx:id="inputSearch" layoutX="126.0" layoutY="54.0" prefHeight="36.0" prefWidth="365.0" promptText="Emu">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Label layoutX="236.0" layoutY="18.0" text="Encyclopedia">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Pane id="tablePane" fx:id="tablePane" layoutX="15.0" layoutY="107.0" prefHeight="506.0" prefWidth="588.0">
+               <children>
+                  <TableView id="table" fx:id="table" prefHeight="506.0" prefWidth="588.0" />
+               </children>
+            </Pane>
+            <Button id="exitButton" fx:id="exitButton" layoutX="15.0" layoutY="670.0" mnemonicParsing="false" onAction="#exitButton" prefHeight="36.0" prefWidth="588.0" text="Exit" />
+         </children>
+      </Pane>
+      <Pane id="secondPane" fx:id="secondPane" layoutX="45.0" layoutY="241.0" prefHeight="274.0" prefWidth="526.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#79cdf7" height="274.0" stroke="BLACK" strokeType="INSIDE" width="526.0" />
+            <Label layoutX="200.0" layoutY="14.0" text="Add animal">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER_RIGHT" layoutX="36.0" layoutY="60.0" prefHeight="153.0" prefWidth="100.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Name:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Lifespan:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Color:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Sound:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <TextField id="inputName" fx:id="inputName" layoutX="149.0" layoutY="70.0" prefHeight="29.0" prefWidth="304.0" promptText="Emu" />
+            <TextField id="inputLifespan" fx:id="inputLifespan" layoutX="149.0" layoutY="105.0" prefHeight="29.0" prefWidth="304.0" promptText="12-15 years" />
+            <TextField id="inputColor" fx:id="inputColor" layoutX="149.0" layoutY="137.0" prefHeight="29.0" prefWidth="304.0" promptText="Black/Green/Purple" />
+            <TextField id="inputSound" fx:id="inputSound" layoutX="149.0" layoutY="173.0" prefHeight="29.0" prefWidth="304.0" promptText="Krrrrr" />
+            <Button id="lastAddButton" fx:id="lastAddButton" layoutX="268.0" layoutY="215.0" mnemonicParsing="false" onAction="#lastAddButton" text="Add">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+            <Button id="cancelButton" fx:id="cancelButton" layoutX="363.0" layoutY="215.0" mnemonicParsing="false" onAction="#cancelButton" text="Cancel">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane id="thirdPane" fx:id="thirdPane" layoutX="55.0" layoutY="251.0" prefHeight="274.0" prefWidth="526.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#79cdf7" height="274.0" stroke="BLACK" strokeType="INSIDE" width="526.0" />
+            <Label layoutX="200.0" layoutY="14.0" text="Edit animal">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER_RIGHT" layoutX="36.0" layoutY="60.0" prefHeight="153.0" prefWidth="100.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Name:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Lifespan:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Color:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Sound:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <TextField id="inputEditName" fx:id="inputEditName" layoutX="149.0" layoutY="70.0" prefHeight="29.0" prefWidth="304.0" />
+            <TextField id="inputEditLifespan" fx:id="inputEditLifespan" layoutX="149.0" layoutY="105.0" prefHeight="29.0" prefWidth="304.0" />
+            <TextField id="inputEditColor" fx:id="inputEditColor" layoutX="149.0" layoutY="137.0" prefHeight="29.0" prefWidth="304.0" />
+            <TextField id="inputEditSound" fx:id="inputEditSound" layoutX="149.0" layoutY="173.0" prefHeight="29.0" prefWidth="304.0" />
+            <Button id="lastEditButton" fx:id="lastEditButton" layoutX="268.0" layoutY="215.0" mnemonicParsing="false" onAction="#lastEditButton" text="Edit">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+            <Button id="cancelButton" fx:id="cancelButtonB" layoutX="363.0" layoutY="215.0" mnemonicParsing="false" onAction="#cancelButton" text="Cancel">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
