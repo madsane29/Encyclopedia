@@ -1,6 +1,7 @@
 package encyclopedia;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Button;
 
 public class Animal {
 
@@ -9,6 +10,7 @@ public class Animal {
     private SimpleStringProperty color;
     private SimpleStringProperty sound;
     private SimpleStringProperty ID;
+    private Button gomb;
 
     public Animal() {
         this.name = new SimpleStringProperty("");
@@ -16,6 +18,7 @@ public class Animal {
         this.color = new SimpleStringProperty("");
         this.sound = new SimpleStringProperty("");
         this.ID = new SimpleStringProperty("");
+        this.gomb = new Button("Gomb");
     }
 
     public Animal(String name, String lifespan, String color, String sound) {
@@ -24,6 +27,7 @@ public class Animal {
         this.color = new SimpleStringProperty(color);
         this.sound = new SimpleStringProperty(sound);
         this.ID = new SimpleStringProperty("");
+        this.gomb = new Button("Gomb");
     }
 
     public Animal(String name, String lifespan, String color, String sound, String ID) {
@@ -32,6 +36,7 @@ public class Animal {
         this.color = new SimpleStringProperty(color);
         this.sound = new SimpleStringProperty(sound);
         this.ID = new SimpleStringProperty(ID);
+        this.gomb = new Button("Gomb");
     }
 
     public String getName() {
@@ -72,6 +77,14 @@ public class Animal {
 
     public void setID(String ID) {
         this.ID.set(ID);
+    }
+
+    public Button getGomb() {
+        return gomb;
+    }
+
+    public void setGomb(Button gomb) {
+        this.gomb = gomb;
     }
 
 }

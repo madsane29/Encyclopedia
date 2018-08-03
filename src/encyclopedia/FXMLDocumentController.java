@@ -1,8 +1,15 @@
 package encyclopedia;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,16 +21,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
 
 public class FXMLDocumentController implements Initializable {
 
+    //<editor-fold defaultstate="collapsed" desc="@FXML items">
     @FXML
     Pane tablePane;
     @FXML
@@ -54,7 +64,6 @@ public class FXMLDocumentController implements Initializable {
     TextField inputEditColor;
     @FXML
     TextField inputEditSound;
-    
 
     @FXML
     Button addButton;
@@ -70,6 +79,7 @@ public class FXMLDocumentController implements Initializable {
     Button lastEditButton;
     @FXML
     Button exitButton;
+//</editor-fold>
 
     DB db = new DB();
     String tempID;
@@ -81,7 +91,7 @@ public class FXMLDocumentController implements Initializable {
         secondPane.setVisible(true);
         transition(secondPane, 0.1, 1, 200);
     }
-    
+
     @FXML
     private void exitButton(ActionEvent event) {
         Stage stage = (Stage) exitButton.getScene().getWindow();
@@ -90,29 +100,29 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void editButton(ActionEvent event) {
-
         transition(firstPane, 1, 0.3, 200);
+
         if (table.getSelectionModel().getSelectedIndex() != -1) {
-            Animal tmp = (Animal) table.getSelectionModel().getSelectedItem();
             thirdPane.setVisible(true);
             transition(thirdPane, 0.3, 1, 200);
 
+            Animal tmp = (Animal) table.getSelectionModel().getSelectedItem();
             inputEditName.setText(tmp.getName());
             inputEditLifespan.setText(tmp.getLifespan());
             inputEditColor.setText(tmp.getColor());
             inputEditSound.setText(tmp.getSound());
             tempID = tmp.getID();
+
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("You did not choose any data!");
+            alert.setContentText("You did not select any data!");
             alert.setTitle("Error");
             alert.showAndWait();
             transition(firstPane, 0.3, 1, 200);
         }
     }
 
-    
     @FXML
     private void lastEditButton(ActionEvent event) {
         String name = inputEditName.getText();
@@ -120,18 +130,16 @@ public class FXMLDocumentController implements Initializable {
         String color = inputEditColor.getText();
         String sound = inputEditSound.getText();
         Animal tmp = new Animal(name, lifespan, color, sound, tempID);
-        
-        
+
         /*db.updateAnimal(tmp);
         data.clear();
         data.addAll(db.getAllAnimals());
         table.setItems(data);*/
-        
         db.updateAnimal(tmp);
         data.removeIf((Animal dataAnimal) -> dataAnimal.getID().equals(tmp.getID()));
         data.add(tmp);
         table.setItems(data);
-        
+
         thirdPane.setVisible(false);
 
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -177,7 +185,7 @@ public class FXMLDocumentController implements Initializable {
     private void searchButton(ActionEvent event) {
         ObservableList<Animal> temp_data = FXCollections.observableArrayList();
         String input = inputSearch.getText().toLowerCase();
-        
+
         if (!input.equals("")) {
             for (Animal tmp : data) {
                 if (tmp.getName().toLowerCase().contains(input)) {
@@ -211,7 +219,6 @@ public class FXMLDocumentController implements Initializable {
         inputColor.setText("");
         inputSound.setText("");
 
-        
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setContentText("Informations added to database!");
         alert.setHeaderText(null);
@@ -239,34 +246,30 @@ public class FXMLDocumentController implements Initializable {
         TableColumn nameCol = new TableColumn("Name");
         nameCol.setMinWidth(100);
         nameCol.setMaxWidth(200);
-        //nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         TableColumn lifespanCol = new TableColumn("Lifespan");
         lifespanCol.setMinWidth(100);
         lifespanCol.setMaxWidth(200);
-        //lifespanCol.setCellFactory(TextFieldTableCell.forTableColumn());
         lifespanCol.setCellValueFactory(new PropertyValueFactory<>("lifespan"));
 
         TableColumn colorCol = new TableColumn("Color");
         colorCol.setMinWidth(100);
         colorCol.setMaxWidth(200);
-        //colorCol.setCellFactory(TextFieldTableCell.forTableColumn());
         colorCol.setCellValueFactory(new PropertyValueFactory<>("color"));
 
         TableColumn soundCol = new TableColumn("Sound");
         soundCol.setMinWidth(100);
         soundCol.setMaxWidth(200);
-        //soundCol.setCellFactory(TextFieldTableCell.forTableColumn());
         soundCol.setCellValueFactory(new PropertyValueFactory<>("sound"));
 
         TableColumn IDCol = new TableColumn("ID");
         IDCol.setMinWidth(50);
         IDCol.setMaxWidth(200);
-        //IDCol.setCellFactory(TextFieldTableCell.forTableColumn());
         IDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
 
         table.getColumns().addAll(IDCol, nameCol, lifespanCol, colorCol, soundCol);
+        addButtonToTable();
         data.addAll(db.getAllAnimals());
         table.setItems(data);
     }
@@ -278,6 +281,55 @@ public class FXMLDocumentController implements Initializable {
         tmp.setFromValue(from);
         tmp.setToValue(to);
         tmp.play();
+    }
+
+    private void addButtonToTable() {
+        TableColumn<Animal, Void> playSoundCol = new TableColumn("Play sound");
+        double prefWidth = playSoundCol.getPrefWidth();
+        playSoundCol.setMinWidth(prefWidth);
+        playSoundCol.setMaxWidth(prefWidth);
+        playSoundCol.setStyle("-fx-alignment: CENTER");
+        
+        
+        Callback<TableColumn<Animal, Void>, TableCell<Animal, Void>> cellFactory = new Callback<TableColumn<Animal, Void>, TableCell<Animal, Void>>() {
+            @Override
+            public TableCell<Animal, Void> call(final TableColumn<Animal, Void> param) {
+                final TableCell<Animal, Void> cell = new TableCell<Animal, Void>() {
+
+                    private final Button btn = new Button("Play");
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            String fileName = "C:\\Users\\Petkovics\\Desktop\\newproject\\Encyclopedia\\src\\encyclopedia\\waterdrop.mp3";
+                            Sound sound = new Sound();
+                            sound.play(fileName);
+                            
+                           
+                            
+                            
+
+                            Animal data = getTableView().getItems().get(getIndex());
+                            System.out.println("selectedData: " + data);
+                        });
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        playSoundCol.setCellFactory(cellFactory);
+
+        table.getColumns().add(playSoundCol);
+
     }
 
 }
