@@ -10,7 +10,7 @@ public class Animal {
     private SimpleStringProperty color;
     private SimpleStringProperty sound;
     private SimpleStringProperty ID;
-    private Button gomb;
+    private Button button;
 
     public Animal() {
         this.name = new SimpleStringProperty("");
@@ -18,7 +18,7 @@ public class Animal {
         this.color = new SimpleStringProperty("");
         this.sound = new SimpleStringProperty("");
         this.ID = new SimpleStringProperty("");
-        this.gomb = new Button("Gomb");
+        this.button = new Button("");
     }
 
     public Animal(String name, String lifespan, String color, String sound) {
@@ -27,7 +27,7 @@ public class Animal {
         this.color = new SimpleStringProperty(color);
         this.sound = new SimpleStringProperty(sound);
         this.ID = new SimpleStringProperty("");
-        this.gomb = new Button("Gomb");
+        this.button = new Button("");
     }
 
     public Animal(String name, String lifespan, String color, String sound, String ID) {
@@ -36,7 +36,7 @@ public class Animal {
         this.color = new SimpleStringProperty(color);
         this.sound = new SimpleStringProperty(sound);
         this.ID = new SimpleStringProperty(ID);
-        this.gomb = new Button("Gomb");
+        this.button = new Button("");
     }
 
     public String getName() {
@@ -80,11 +80,11 @@ public class Animal {
     }
 
     public Button getGomb() {
-        return gomb;
+        return button;
     }
 
     public void setGomb(Button gomb) {
-        this.gomb = gomb;
+        this.button = gomb;
     }
 
 }

@@ -5,9 +5,10 @@
  */
 package encyclopedia;
 
-import java.io.InputStream;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -15,20 +16,16 @@ import sun.audio.AudioStream;
  */
 public class Sound {
 
-    private InputStream inputStream = null;
-    private static AudioStream audioStream = null;
+     public Sound(String fileName) {
 
-    public static void stop() {
-        AudioPlayer.player.stop(audioStream);
-    }
-
-    public void play(String FILENAME) {
         try {
-            inputStream = getClass().getResourceAsStream("/Sound/" + FILENAME);
-            audioStream = new AudioStream(inputStream);
-            AudioPlayer.player.start(audioStream);
-        } catch (Exception error) {
-            System.out.println("Unable to play audio clip");
+            URL url = this.getClass().getClassLoader().getResource(fileName);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

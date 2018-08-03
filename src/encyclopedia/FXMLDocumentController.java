@@ -1,15 +1,8 @@
 package encyclopedia;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -300,16 +293,7 @@ public class FXMLDocumentController implements Initializable {
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            String fileName = "C:\\Users\\Petkovics\\Desktop\\newproject\\Encyclopedia\\src\\encyclopedia\\waterdrop.mp3";
-                            Sound sound = new Sound();
-                            sound.play(fileName);
-                            
-                           
-                            
-                            
-
-                            Animal data = getTableView().getItems().get(getIndex());
-                            System.out.println("selectedData: " + data);
+                            new Sound("waterdrop.wav");
                         });
                     }
 
